@@ -29,7 +29,7 @@ Para garantizar que el proyecto se ejecute de manera idéntica al entorno de des
    conda activate supervision  
    ```
 
-4. **Descargar dependencias:**
+4. **Instalar dependencias:**
    ```bash
    pip install -r notebooks/info/requirements.txt  
    ```
