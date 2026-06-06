@@ -8,7 +8,7 @@ dir = current / 'assets/videos'
 os.makedirs(dir, exist_ok=True)
 
 # 2. Configuración del video ficticio (2 segundos a 30 FPS = 60 cuadros)
-OUTPUT_PATH = dir / 'futbot-2s.mp4'
+OUTPUT_PATH = dir / 'futbot-3.mp4'
 WIDTH, HEIGHT = 1080, 600  # Dimensiones de tu imagen original
 FPS = 30
 TOTAL_FRAMES = 60
@@ -35,14 +35,19 @@ for i in range(TOTAL_FRAMES):
     # Simular un balón naranja moviéndose por la cancha oblicua
     bx = int(300 + (i * 8))
     by = int(250 + (i * 2))
-    cv2.circle(frame, (bx, by), 15, (0, 140, 255), -1)  # Balón naranja BGR
-    cv2.putText(frame, "Ball", (bx - 15, by - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 140, 255), 2)
+    cv2.circle(frame, (bx, by), 15, (10, 160, 255), -1)  # Balón naranja BGR
+    cv2.putText(frame, "Ball", (bx - 15, by - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (10, 160, 255), 2)
     
     # Simular un robot azul moviéndose
     rx = int(400 - (i * 2))
     ry = int(300 + (i * 3))
     cv2.rectangle(frame, (rx - 20, ry - 20), (rx + 20, ry + 20), (255, 0, 0), -1)  # Robot azul
     cv2.putText(frame, "Robot1", (rx - 25, ry - 25), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+
+    rx = int(550 + (i * 2))
+    ry = int(350 - (i * 3))
+    cv2.rectangle(frame, (rx - 20, ry - 20), (rx + 20, ry + 20), (0, 0, 255), -1)  # Robot rojo
+    cv2.putText(frame, "Robot2", (rx - 25, ry - 25), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
     # Guardar el cuadro en el archivo de video
     video_writer.write(frame)
