@@ -1,0 +1,17 @@
+names:
+- ball
+- blue_shirt
+- goal
+- person
+- red_shirt
+- robot
+nc: 6
+roboflow:
+  license: CC BY 4.0
+  project: annotation_public_dataset-ppyek
+  url: https://universe.roboflow.com/osval-elias-montesinos-valladares/annotation_public_dataset-ppyek/dataset/1
+  version: 1
+  workspace: osval-elias-montesinos-valladares
+test: ../train/images
+train: ../train/images
+val: ../train/images
