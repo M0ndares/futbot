@@ -1,5 +1,4 @@
 **COPA FUTBOT 2026: CENTRO X META**
-![alt text](image.png)
 ![YOLOv8](https://img.shields.io/badge/Model-YOLOv8-blue)
 ![Python](https://img.shields.io/badge/Language-Python-green)
 ![Supervision](https://img.shields.io/badge/Library-Supervision-orange)
@@ -8,8 +7,8 @@ Detección de objetos, mapas de calor y seguimiento en tiempo real para fútbol 
 
 ---
 
-## 📺 Demostración en Vivo
-[Mira el sistema en acción haciendo clic aquí](###)
+## 📺 Demostración 
+[Video en instagram](###)
 
 ---
 
@@ -17,18 +16,6 @@ Detección de objetos, mapas de calor y seguimiento en tiempo real para fútbol 
 * **Clases:** Modelo optimizado para 3 clases esenciales (`ball`, `goal`, `robot`).
 * **Procesamiento:** Dataset estandarizado a $640 \times 640$.
 * **Métricas de Tracking:** Generación de mapas de calor distribuidos y trazos de movimiento.
-
----
-table border="0">
-  <tr>
-    <td width="50%" align="center" valign="middle">
-      <p><b>Ejemplo de Detección y Resizing</b></p>
-      <img src="futbol.jpg" width="90%" alt="Ejemplo de Detección">
-      <br>
-      <small><i>Alineación geométrica y mapeo de bounding boxes</i></small>
-    </td>
-  </tr>
-</table>
 
 
 ## 📊 Resultados del Entrenamiento
@@ -57,3 +44,5 @@ pip install ultralytics supervision opencv-python
 \`\`\`bash
 python app.py
 \`\`\`
+
+![Imagen](image.png)
