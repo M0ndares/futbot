@@ -1,0 +1,14 @@
+names:
+- ball
+- goal
+- robot
+nc: 3
+roboflow:
+  license: CC BY 4.0
+  project: futbot-2026-8o5yc
+  url: https://universe.roboflow.com/osval-elias-montesinos-valladares/futbot-2026-8o5yc/dataset/1
+  version: 1
+  workspace: osval-elias-montesinos-valladares
+test: ../test/images
+train: ../train/images
+val: ../valid/images

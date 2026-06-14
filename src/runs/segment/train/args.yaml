@@ -1,10 +1,10 @@
 task: segment
 mode: train
 model: yolov8n-seg.pt
-data: /home/osvalml/oemv_2026/main/machinary/futbot/src/Annotation_public_dataset-1/data.yaml
-epochs: 50
+data: /home/osvalml/oemv_2026/main/machinary/futbot/src/Futbot-2026-1/data.yaml
+epochs: 250
 time: null
-patience: 100
+patience: 25
 batch: 16
 imgsz: 640
 save: true
