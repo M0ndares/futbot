@@ -1,12 +1,12 @@
 import os
 import cv2
 import numpy as np
-from ultralytics import YOLO
+from ultralytics import YOLO, SAM
 import supervision as sv
 from pathlib import Path
 
 CURRENT_PATH = Path.cwd()
-VIDEO_PATH = CURRENT_PATH / "videos/prueba1.mp4"
+VIDEO_PATH = CURRENT_PATH / "videos/prueba1.mp4" # prueba1.mp4, prueba2.mp4, prueba3.MOV
 OUTPUT_PATH = CURRENT_PATH / "videos/resultado_segmentado1.mp4"
 MATRIZ_PATH = CURRENT_PATH / "matriz_homografia.npy"
 WINDOW_NAME = "Calibrador de Homografia"
@@ -17,7 +17,7 @@ ALTO_REAL = 400
 PUNTOS_REALES = np.array([
     [0, 0],              
     [ANCHO_REAL - 50, 0], 
-    [ANCHO_REAL, 50],     
+    [ANCHO_REAL, ALTO_REAL - 100],     
     [ANCHO_REAL, ALTO_REAL], 
     [0, ALTO_REAL],       
 ], dtype=np.float32)
@@ -68,7 +68,9 @@ def ejecutar_calibracion():
         exit()
 
 H = ejecutar_calibracion()
-yolo_model = YOLO("runs/segment/train/weights/best.pt") 
+yolo_model = YOLO(str(CURRENT_PATH / "runs/segment/train/weights/best.pt"))
+sam_model = SAM(str(CURRENT_PATH / "../notebooks/sam3.pt"))
+
 tracker = sv.ByteTrack()
 
 mask_annotator = sv.MaskAnnotator()              
@@ -133,11 +135,10 @@ def dibujar_campo_tactico(detections, posiciones_reales, frame_original):
                 name = yolo_model.names[class_id].lower()
                 
                 if 'ball' in name or 'pelota' in name:
-                    cv2.circle(mini_campo, (x, y), 6, (0, 0, 255), -1) # Pelota: Roja
+                    cv2.circle(mini_campo, (x, y), 6, (0, 0, 255), -1) 
                 else:
-                    # Clasificar equipo por color dinámicamente para el radar táctico
                     es_aliado = es_robot_aliado(frame_original, detections.xyxy[idx])
-                    color_nodo = (255, 255, 0) if es_aliado else (0, 255, 255) # Aliados Amarillos / Rivales Rojos
+                    color_nodo = (255, 255, 0) if es_aliado else (0, 255, 255) 
                     print(color_nodo)
                     cv2.circle(mini_campo, (x, y), 7, color_nodo, -1) 
                     if detections.tracker_id is not None:
@@ -168,21 +169,29 @@ def detectar_colisiones(posiciones_reales, detections):
     return alertas
 
 def process_frame(frame: np.ndarray, frame_idx: int) -> np.ndarray:
-    results = yolo_model(frame, conf=0.4)[0]
-    detections = sv.Detections.from_ultralytics(results)
-    detections = tracker.update_with_detections(detections)
+    yolo_results = yolo_model(frame, conf=0.5, verbose=False)[0]
     
+    if len(yolo_results.boxes) > 0:
+        boxes = yolo_results.boxes.xyxy.cpu().numpy()
+        class_ids = yolo_results.boxes.cls.cpu().numpy().astype(int)
+        confidences = yolo_results.boxes.conf.cpu().numpy()
+        sam_results = sam_model.predict(frame, bboxes=boxes, verbose=False)[0]
+        detections = sv.Detections.from_ultralytics(sam_results)
+        detections.class_id = class_ids
+        detections.confidence = confidences
+    else:
+        detections = sv.Detections.empty()
+    
+    detections = tracker.update_with_detections(detections)
     annotated_frame = frame.copy()        
     annotated_frame = mask_annotator.annotate(scene=annotated_frame, detections=detections)
     
-    # --- GENERAR ETIQUETAS DINÁMICAS POR COLOR ---
     labels = []
     for idx, class_id in enumerate(detections.class_id):
         name = yolo_model.names[class_id].lower()
         tid = detections.tracker_id[idx] if detections.tracker_id is not None else "X"
         
         if 'robot' in name:
-            # Aquí ocurre la magia por software
             if es_robot_aliado(frame, detections.xyxy[idx]):
                 labels.append(f"Aliado ID: {tid}")
             else:
