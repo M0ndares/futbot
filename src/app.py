@@ -169,7 +169,8 @@ def detectar_colisiones(posiciones_reales, detections):
     return alertas
 
 def process_frame(frame: np.ndarray, frame_idx: int) -> np.ndarray:
-    yolo_results = yolo_model(frame, conf=0.5, verbose=False)[0]
+    yolo_results = yolo_model(frame, conf=0.5
+    , verbose=False)[0]
     
     if len(yolo_results.boxes) > 0:
         boxes = yolo_results.boxes.xyxy.cpu().numpy()
