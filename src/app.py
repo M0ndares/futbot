@@ -6,8 +6,8 @@ import supervision as sv
 from pathlib import Path
 
 CURRENT_PATH = Path.cwd()
-VIDEO_PATH = CURRENT_PATH / "videos/prueba1.mp4" # prueba1.mp4, prueba2.mp4, prueba3.MOV
-OUTPUT_PATH = CURRENT_PATH / "videos/resultado_segmentado1.mp4"
+VIDEO_PATH = CURRENT_PATH / "videos/prueba.mp4"
+OUTPUT_PATH = CURRENT_PATH / "videos/resultado.mp4"
 MATRIZ_PATH = CURRENT_PATH / "matriz_homografia.npy"
 WINDOW_NAME = "Calibrador de Homografia"
 
