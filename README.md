@@ -3,46 +3,100 @@
 ![Python](https://img.shields.io/badge/Language-Python-green)
 ![Supervision](https://img.shields.io/badge/Library-Supervision-orange)
 
-Detección de objetos, mapas de calor y seguimiento en tiempo real para fútbol robótico (FMR).
+Detección de objetos, mapas de calor y seguimiento en tiempo real para fútbol robótico.
+
+## 📖 Descripción y Arquitectura de la Solución
+
+Este proyecto implementa un pipeline completo de visión computacional y análisis deportivo aplicado a la robótica. El sistema es capaz de procesar videos de la cancha de la Copa FutBotMX para rastrear jugadores y el balón, y traducir esa información visual a un plano táctico 2D en centímetros reales, calculando mapas de calor y previniendo colisiones en tiempo real.
+
+### Arquitectura del Pipeline (Flujo de Datos)
+
+La solución se estructuró de forma modular en cinco etapas críticas, ejecutadas secuencialmente cuadro por cuadro:
+
+1.  **Calibración:** Al inicio, el sistema captura el primer frame y permite al usuario marcar las esquinas de la cancha para .
+2.  **Identificación:** Un modelo YOLOv8n, entrenado con **2,840 imágenes** sobre tres clases (**'ball'**, **'goal'** y **'robot'**), detecta las *bounding boxes* de los elementos.
+3.  **Segmentación:** El modelo **Segment Anything (SAM)** toma las cajas de YOLO para segmentar los polígonos exactos, extrayendo el contorno de los objetos.
+4.  **Consistencia:** Un algoritmo de rastreo asigna y mantiene IDs únicos y fijos para cada entidad.
+5.  **Proyección homográfica:**
+    * **Homografía ($H$):** Se aplica una transformación matemática proyectiva sobre el punto inferior de cada objeto para calcular su posición real en la cancha ($2D$) en centímetros.
+    * **Análisis HSV:** Se analizan las áreas segmentadas de cada robot para clasificarlos por equipos de acuerdo a su color predominante.
+    * **Mapas de Calor:** Se acumulan las posiciones en un lienzo para generar un mapa de calor  (`cv2.COLORMAP_JET`).
+    * **Detección de Colisiones:** Se miden distancias euclidianas para alertar choques ($distancia < 35 \text{ cm}$).
 
 ---
 
-## 📺 Demostración 
-[Video en instagram](###)
+## 🛠️ Requisitos de Hardware y Software
+
+### Software (Dependencias)
+
+Este proyecto fue desarrollado en Python 3.11.15. Las librerías principales se pueden instalar vía `pip`.
+
+* `opencv-python` (con soporte GUI para calibración)
+* `ultralytics` (para YOLO y SAM)
+* `supervision` (para tracking y anotación avanzada)
+* `numpy`
+* `pathlib`
+
+*(Ver archivo `requirements.txt` para versiones exactas).*
+
+### Hardware Recomendado
+
+Debido a que el pipeline utiliza dos modelos de Deep Learning pesados (YOLOv8 + SAM) corriendo cuadro por cuadro, se recomienda encarecidamente el uso de GPU para una reproducción fluida.
+
+* **Procesador (CPU):** Intel Core i7 / AMD Ryzen 7 o superior.
+* **GPU (Recomendado):** NVIDIA GeForce RTX 3060 / RTX 4070 o superior, con al menos 8GB de VRAM.
+* **RAM:** 16GB o más.
 
 ---
 
-## 🚀 Características Clave
-* **Clases:** Modelo optimizado para 3 clases esenciales (`ball`, `goal`, `robot`).
-* **Procesamiento:** Dataset estandarizado a $640 \times 640$.
-* **Métricas de Tracking:** Generación de mapas de calor distribuidos y trazos de movimiento.
+## 🚀 Instalación y Reproducción Paso a Paso
 
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone https://github.com/M0ndares/futbot.git 
+    cd futbot
+    ```
 
-## 📊 Resultados del Entrenamiento
+2.  **Crear y activar el entorno (Recomendado):**
+    ```bash
+    conda create -n futbot python=3.11.15
+    conda activate futbot
+    ```
 
-| Métrica | Valor |
-| :--- | :--- |
-| Épocas | --- |
-| Tamaño de Imagen | 640x640 |
-| Dataset Total | +2000 imágenes |
+3.  **Instalar dependencias:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Descargar los pesos de los modelos:**
+    Asegúrate de colocar los archivos `.pt` (tus modelos fine-tuneados) en las carpetas correctas según tu script (`/runs/segment/train/weights/best.pt` y `../notebooks/sam3.pt`).
+
+5.  **Ejecutar el pipeline:**
+    Si es la primera vez que lo corres con un video nuevo, borra el archivo `matriz_homografia.npy` para forzar la calibración.
+    ```bash
+    python src/app.py
+    ```
 
 ---
 
-## 🛠️ Instalación y Uso
+## 🎯 Resultados Obtenidos
 
-1. Clonar el repositorio:
-\`\`\`bash
-git clone https://github.com/tu_usuario/futbot-tracking.git
-\`\`\`
+El sistema logra integrar perfectamente las 5 fases, desplegando en tiempo real el mini-campo táctico, clasificando equipos por color e iluminando el mapa de calor acumulativo mientras alerta visualmente sobre los choques de los robots.
 
-2. Instalar dependencias:
-\`\`\`bash
-pip install ultralytics supervision opencv-python
-\`\`\`
+---
 
-3. Correr la inferencia:
-\`\`\`bash
-python app.py
-\`\`\`
+## 🔗 Videos
 
-![Imagen](image.png)
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/reel/DZvCUDOAp7F/?igsh=ZmI2cm01c2phMnN2)
+[![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtube.com/shorts/xa6VbuJZ9_Y?feature=share)
+---
+
+## 📝 Licencia del Proyecto y Créditos
+
+### Licencia
+
+Este proyecto está licenciado bajo la **Licencia MIT**. Puedes consultar el texto completo en el archivo `LICENSE` adjunto en este repositorio.
+
+### Propiedad Intelectual
+
+ Al participar en el reto, los equipos otorgan a la organización una licencia no exclusiva, gratuita, mundial y sin límite de tiempo para exhibir, publicar y difundir el proyecto con fines de promoción. Esta licencia no transfiere la propiedad del código ni autoriza su uso comercial por parte de la organización.
