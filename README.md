@@ -5,11 +5,13 @@
 
 Detección de objetos, mapas de calor y seguimiento en tiempo real para fútbol robótico.
 
-## 📖 Descripción y Arquitectura de la Solución
+---
 
-Este proyecto implementa un pipeline completo de visión computacional y análisis deportivo aplicado a la robótica. El sistema es capaz de procesar videos de la cancha de la Copa FutBotMX para rastrear jugadores y el balón, y traducir esa información visual a un plano táctico 2D en centímetros reales, calculando mapas de calor y previniendo colisiones en tiempo real.
+## Arquitectura de la Solución
 
-### Arquitectura del Pipeline (Flujo de Datos)
+El sistema es capaz de procesar videos de la Copa FutBotMX para rastrear los objetos en campo, y traducir esa información visual a un plano 2D, calculando mapas de calor y notificando colisiones en tiempo real.
+
+### Pipeline
 
 La solución se estructuró de forma modular en cinco etapas críticas, ejecutadas secuencialmente cuadro por cuadro:
 
@@ -25,9 +27,7 @@ La solución se estructuró de forma modular en cinco etapas críticas, ejecutad
 
 ---
 
-## 🛠️ Requisitos de Hardware y Software
-
-### Software (Dependencias)
+## Requisitos de Software 
 
 Este proyecto fue desarrollado en Python 3.11.15. Las librerías principales se pueden instalar vía `pip`.
 
@@ -39,7 +39,7 @@ Este proyecto fue desarrollado en Python 3.11.15. Las librerías principales se 
 
 *(Ver archivo `requirements.txt` para versiones exactas).*
 
-### Hardware Recomendado
+### Requisitos de Hardware 
 
 Debido a que el pipeline utiliza dos modelos de Deep Learning pesados (YOLOv8 + SAM) corriendo cuadro por cuadro, se recomienda encarecidamente el uso de GPU para una reproducción fluida.
 
@@ -49,7 +49,7 @@ Debido a que el pipeline utiliza dos modelos de Deep Learning pesados (YOLOv8 + 
 
 ---
 
-## 🚀 Instalación y Reproducción Paso a Paso
+## Instalación y Reproducción 
 
 1.  **Clonar el repositorio:**
     ```bash
@@ -57,7 +57,7 @@ Debido a que el pipeline utiliza dos modelos de Deep Learning pesados (YOLOv8 + 
     cd futbot
     ```
 
-2.  **Crear y activar el entorno (Recomendado):**
+2.  **Crear y activar el entorno:**
     ```bash
     conda create -n futbot python=3.11.15
     conda activate futbot
@@ -79,24 +79,17 @@ Debido a que el pipeline utiliza dos modelos de Deep Learning pesados (YOLOv8 + 
 
 ---
 
-## 🎯 Resultados Obtenidos
-
+## Resultados Obtenidos
 El sistema logra integrar perfectamente las 5 fases, desplegando en tiempo real el mini-campo táctico, clasificando equipos por color e iluminando el mapa de calor acumulativo mientras alerta visualmente sobre los choques de los robots.
 
----
-
-## 🔗 Videos
-
+## Videos
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/reel/DZvCUDOAp7F/?igsh=ZmI2cm01c2phMnN2)
 [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtube.com/shorts/xa6VbuJZ9_Y?feature=share)
+
 ---
 
-## 📝 Licencia del Proyecto y Créditos
-
-### Licencia
-
+##  Licencia del Proyecto y Créditos
 Este proyecto está licenciado bajo la **Licencia MIT**. Puedes consultar el texto completo en el archivo `LICENSE` adjunto en este repositorio.
 
 ### Propiedad Intelectual
-
- Al participar en el reto, los equipos otorgan a la organización una licencia no exclusiva, gratuita, mundial y sin límite de tiempo para exhibir, publicar y difundir el proyecto con fines de promoción. Esta licencia no transfiere la propiedad del código ni autoriza su uso comercial por parte de la organización.
+Al participar en el reto, otorgamos a la organización una licencia no exclusiva, gratuita, mundial y sin límite de tiempo para exhibir, publicar y difundir el proyecto con fines de promoción. Esta licencia no transfiere la propiedad del código ni autoriza su uso comercial por parte de la organización.
