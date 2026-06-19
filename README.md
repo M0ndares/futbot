@@ -67,7 +67,7 @@ Debido a que el pipeline utiliza dos modelos de Deep Learning pesados (YOLOv8 + 
     ```
 
 4.  **Descargar los pesos de los modelos:**
-    Asegúrate de colocar los archivos `.pt` (tus modelos fine-tuneados) en las carpetas correctas según tu script (`/runs/segment/train/weights/best.pt` y `../notebooks/sam3.pt`).
+    Asegúrate de colocar los archivos `.pt` en las carpetas correctas según tu script (`/runs/segment/train/weights/best.pt` y `../notebooks/sam3.pt`).
 
 5.  **Ejecutar el pipeline:**
     Si es la primera vez que lo corres con un video nuevo, borra el archivo `matriz_homografia.npy` para forzar la calibración.
