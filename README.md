@@ -1,4 +1,4 @@
-# **COPA FUTBOT 2026: CENTRO X META**
+## **COPA FUTBOT 2026: CENTRO X META**
 ![YOLOv8](https://img.shields.io/badge/Model-YOLOv8-blue)
 ![Python](https://img.shields.io/badge/Language-Python-green)
 ![Supervision](https://img.shields.io/badge/Library-Supervision-orange)
@@ -8,11 +8,9 @@ Detección de objetos, mapas de calor y seguimiento en tiempo real para fútbol 
 ---
 
 ### Arquitectura de la Solución
-
 El sistema es capaz de procesar videos de la Copa FutBotMX para rastrear los objetos en campo, y traducir esa información visual a un plano 2D, calculando mapas de calor y notificando colisiones en tiempo real.
 
 ### Pipeline
-
 La solución se estructuró de forma modular en cinco etapas críticas, ejecutadas secuencialmente cuadro por cuadro:
 
 1.  **Calibración:** Al inicio, el sistema captura el primer frame y permite al usuario marcar las esquinas de la cancha para .
