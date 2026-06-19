@@ -1,4 +1,4 @@
-**COPA FUTBOT 2026: CENTRO X META**
+# **COPA FUTBOT 2026: CENTRO X META**
 ![YOLOv8](https://img.shields.io/badge/Model-YOLOv8-blue)
 ![Python](https://img.shields.io/badge/Language-Python-green)
 ![Supervision](https://img.shields.io/badge/Library-Supervision-orange)
@@ -7,7 +7,7 @@ Detección de objetos, mapas de calor y seguimiento en tiempo real para fútbol 
 
 ---
 
-## Arquitectura de la Solución
+### Arquitectura de la Solución
 
 El sistema es capaz de procesar videos de la Copa FutBotMX para rastrear los objetos en campo, y traducir esa información visual a un plano 2D, calculando mapas de calor y notificando colisiones en tiempo real.
 
@@ -27,7 +27,7 @@ La solución se estructuró de forma modular en cinco etapas críticas, ejecutad
 
 ---
 
-## Requisitos de Software 
+### Requisitos de Software 
 
 Este proyecto fue desarrollado en Python 3.11.15. Las librerías principales se pueden instalar vía `pip`.
 
@@ -49,7 +49,7 @@ Debido a que el pipeline utiliza dos modelos de Deep Learning pesados (YOLOv8 + 
 
 ---
 
-## Instalación y Reproducción 
+### Instalación y Reproducción 
 
 1.  **Clonar el repositorio:**
     ```bash
@@ -79,16 +79,16 @@ Debido a que el pipeline utiliza dos modelos de Deep Learning pesados (YOLOv8 + 
 
 ---
 
-## Resultados Obtenidos
+### Resultados Obtenidos
 El sistema logra integrar perfectamente las 5 fases, desplegando en tiempo real el mini-campo táctico, clasificando equipos por color e iluminando el mapa de calor acumulativo mientras alerta visualmente sobre los choques de los robots.
 
-## Videos
+### Videos
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/reel/DZvCUDOAp7F/?igsh=ZmI2cm01c2phMnN2)
 [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtube.com/shorts/xa6VbuJZ9_Y?feature=share)
 
 ---
 
-##  Licencia del Proyecto y Créditos
+###  Licencia del Proyecto y Créditos
 Este proyecto está licenciado bajo la **Licencia MIT**. Puedes consultar el texto completo en el archivo `LICENSE` adjunto en este repositorio.
 
 ### Propiedad Intelectual
