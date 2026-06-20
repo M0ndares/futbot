@@ -13,9 +13,9 @@ El sistema es capaz de procesar videos de la Copa FutBotMX para rastrear los obj
 ### Pipeline
 La solución se estructuró de forma modular en cinco etapas críticas, ejecutadas secuencialmente cuadro por cuadro:
 
-1.  **Calibración:** Al inicio, el sistema captura el primer frame y permite al usuario marcar las esquinas de la cancha para .
+1.  **Calibración:** Al inicio, el sistema captura el primer frame y permite al usuario marcar las esquinas de la cancha para calcular la matriz de proyección homográfica ($H$)..
 2.  **Identificación:** Un modelo YOLOv8n, entrenado con **2,840 imágenes** sobre tres clases (**'ball'**, **'goal'** y **'robot'**), detecta las *bounding boxes* de los elementos.
-3.  **Segmentación:** El modelo **Segment Anything (SAM)** toma las cajas de YOLO para segmentar los polígonos exactos, extrayendo el contorno de los objetos.
+3.  **Segmentación:** El modelo **Segment Anything (SAM3)** toma las cajas de YOLO para segmentar los polígonos exactos, extrayendo el contorno de los objetos.
 4.  **Consistencia:** Un algoritmo de rastreo asigna y mantiene IDs únicos y fijos para cada entidad.
 5.  **Proyección homográfica:**
     * **Homografía ($H$):** Se aplica una transformación matemática proyectiva sobre el punto inferior de cada objeto para calcular su posición real en la cancha ($2D$) en centímetros.
@@ -29,11 +29,12 @@ La solución se estructuró de forma modular en cinco etapas críticas, ejecutad
 
 Este proyecto fue desarrollado en Python 3.11.15. Las librerías principales se pueden instalar vía `pip`.
 
-* `opencv-python` (con soporte GUI para calibración)
-* `ultralytics` (para YOLO y SAM)
-* `supervision` (para tracking y anotación avanzada)
+* `opencv-python` 
+* `ultralytics` 
+* `supervision` 
 * `numpy`
 * `pathlib`
+* `ultralytics`
 
 *(Ver archivo `requirements.txt` para versiones exactas).*
 
@@ -89,5 +90,8 @@ El sistema logra integrar perfectamente las 5 fases, desplegando en tiempo real 
 ###  Licencia del Proyecto y Créditos
 Este proyecto está licenciado bajo la **Licencia MIT**. Puedes consultar el texto completo en el archivo `LICENSE` adjunto en este repositorio.
 
-### Propiedad Intelectual
-Al participar en el reto, otorgamos a la organización una licencia no exclusiva, gratuita, mundial y sin límite de tiempo para exhibir, publicar y difundir el proyecto con fines de promoción. Esta licencia no transfiere la propiedad del código ni autoriza su uso comercial por parte de la organización.
+## Uso de Código de Terceros 
+Este proyecto utiliza las siguientes bibliotecas y herramientas de código abierto como dependencias clave:
+* **Ultralytics**: Para la ejecución y detección mediante el modelo YOLOv8 y el backend de segmentación de SAM.
+* **Roboflow Supervision**: Empleada para el algoritmo de rastreo `ByteTrack`, así como para la lógica de visualización mediante los anotadores avanzados (`MaskAnnotator`, `TraceAnnotator`, `LabelAnnotator`).
+* **OpenCV**: Utilizada para la manipulación matricial de imágenes, conversión de espacios de color (HSV), cálculo de homografía y dibujo de mapas en tiempo real.
