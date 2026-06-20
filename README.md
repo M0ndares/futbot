@@ -83,7 +83,7 @@ El sistema logra integrar perfectamente las 5 fases, desplegando en tiempo real 
 
 ### Videos
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/reel/DZvCUDOAp7F/?igsh=ZmI2cm01c2phMnN2)
-[![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](src/videos/youtube.mp4)
+[![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtube.com/shorts/xa6VbuJZ9_Y)
 
 ---
 
