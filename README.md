@@ -79,7 +79,7 @@ Since the pipeline uses two heavy Deep Learning models (YOLOv8 + SAM) running fr
 ---
 
 ### Results Obtained
-The system perfectly integrates all 5 phases, displaying the tactical mini-field in real time, classifying teams by color, and illuminating the cumulative heatmap while visually alerting about robot collisions.
+The system perfectly integrates all 5 phases, displaying the tactical mini-field in real time, classifying teams by color, and illuminating the cumulative heatmap while visually alerting about robot collisions. The diploma provided by SECIHTI is available in the following [Link](https://drive.google.com/file/d/1N4x_T9GPX2HJfjCr6zBl_2VS4GR61Hc4/view?usp=sharing)
 
 ### Videos
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/reel/DZvCUDOAp7F/?igsh=ZmI2cm01c2phMnN2)
